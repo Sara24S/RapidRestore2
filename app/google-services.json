@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "305420456789",
+    "project_id": "example-597be",
+    "storage_bucket": "example-597be.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305420456789:android:9b113a4aca43469f7295dc",
+        "android_client_info": {
+          "package_name": "com.example.rapidrestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "305420456789-tc5gni9mmbkfgcescf5qhdqu0a6rhddb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rapidrestore",
+            "certificate_hash": "769e03f97ee58bd17a774123d4ff239b84fc72e5"
+          }
+        },
+        {
+          "client_id": "305420456789-nbn54678085hst9o2o1mj7tb8pm5ie9e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8fhqnrwxU9W6D1o3M9Jc0qNBdbtk3q8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "305420456789-nbn54678085hst9o2o1mj7tb8pm5ie9e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
