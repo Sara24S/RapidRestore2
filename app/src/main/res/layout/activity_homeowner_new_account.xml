@@ -1,56 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HomeownerNewAccount">
-    <TableRow>
-        <TextView
-            android:layout_weight="1"
+    tools:context=".HomeownerNewAccount"
+    android:gravity="center">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_numberOrEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mobile number or email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_numberOrEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="email: ">
+            android:inputType="text"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        </TextView>
-        <EditText
-            android:layout_weight="2"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your email"
-            android:id="@+id/email">
-        </EditText>
-    </TableRow>
+            android:inputType="text"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <TableRow>
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="password: ">
+    <Button
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:onClick="signUp"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/my_button_color">
 
-        </TextView>
-        <EditText
-            android:layout_weight="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your password"
-            android:id="@+id/password">
-        </EditText>
-    </TableRow>
+    </Button>
 
-    <TableRow>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            android:onClick="submit"
-            android:layout_weight="1">
-        </Button>
-
-    </TableRow>
-
-
-</TableLayout>
+</LinearLayout>

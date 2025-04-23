@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.firebase.services)
+    //alias(libs.plugins.firebase.services)
+    id("com.google.gms.google-services")
     //alias(libs.plugins.google.services)
    // alias(libs.plugins.firebase.services)  // Applies the plugin
 }
@@ -41,6 +42,10 @@ dependencies {
 
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.android.volley:volley:1.2.1")
+    implementation("com.google.firebase:firebase-auth")
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)

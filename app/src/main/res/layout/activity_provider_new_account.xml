@@ -1,66 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProviderNewAccount">
+    tools:context=".ProviderNewAccount"
+    android:orientation="vertical"
+    android:gravity="center">
 
-    <TableRow>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fill in your info: "
+        android:layout_marginStart="10dp"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_fullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Full name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_fullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
         <TextView
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="email: ">
-
-        </TextView>
-        <EditText
-            android:layout_weight="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your email"
-            android:id="@+id/email">
-        </EditText>
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="password: ">
-
-        </TextView>
-        <EditText
-            android:layout_weight="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your password"
-            android:id="@+id/password">
-        </EditText>
-    </TableRow>
-
-    <TableRow>
-        <Button
-            android:id="@+id/pdfButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select PDF"
-            android:layout_gravity="center"
-            android:padding="12dp" />
+            android:text="Location:"
+            android:layout_marginStart="18dp"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            />
 
-    </TableRow>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/regions_array"
+            android:id="@+id/spinner_regions"
+            android:layout_weight="2"
+            android:textSize="20sp"/>
 
-    <TableRow>
-        <Button
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Years of experience: "
+        android:layout_gravity="left"
+        android:layout_marginStart="18dp"
+        android:textSize="20sp"
+        android:layout_marginTop="15dp"
+        />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="10dp">
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="less than 5"
+            android:layout_weight="1"/>
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="between 5 &amp; 10"
+            android:layout_weight="1"/>
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="more than 10"
+            android:layout_weight="1"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profession/s: "
+        android:layout_gravity="left"
+        android:layout_marginStart="18dp"
+        android:textSize="20sp"
+        android:layout_marginTop="15dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="10dp">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkbox_carpenter"
+            android:onClick="checkBoxProfession"
+            android:text="Carpenter"
+            android:textSize="15sp"
+            android:layout_weight="1"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkbox_plumber"
+            android:onClick="checkBoxProfession"
+            android:text="Plumber"
+            android:textSize="15sp"
+            android:layout_weight="1"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkbox_electrician"
+            android:onClick="checkBoxProfession"
+            android:text="Electrician"
+            android:textSize="15sp"
+            android:layout_weight="1"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkbox_roofer"
+            android:onClick="checkBoxProfession"
+            android:text="Roofer"
+            android:textSize="15sp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="10dp">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkbox_mason"
+            android:onClick="checkBoxProfession"
+            android:text="Mason "
+            android:textSize="15sp"
+            android:layout_weight="1" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkbox_locksmit"
+            android:onClick="checkBoxProfession"
+            android:text="Locksmith"
+            android:textSize="15sp"
+            android:layout_weight="1"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkbox_glassTechnican"
+            android:onClick="checkBoxProfession"
+            android:text="Glass Technican"
+            android:textSize="15sp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_numberOrEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mobile number or email"
+        android:layout_marginTop="15dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_numberOrEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit"
-            android:onClick="submit"
-            android:layout_weight="1">
-        </Button>
+            android:inputType="text"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    </TableRow>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password">
 
-</TableLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit Request"
+        android:onClick="submit"
+        android:textSize="25sp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/my_button_color">
+
+    </Button>
+
+
+</LinearLayout>

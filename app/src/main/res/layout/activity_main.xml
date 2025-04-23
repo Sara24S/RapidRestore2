@@ -25,10 +25,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Already have an acount?"
-        android:textSize="25dp"
+        android:textSize="22dp"
         android:layout_marginTop="100dp"
+        android:layout_marginBottom="10dp"
         >
+    </TextView>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_numberOrEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mobile number or email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_numberOrEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Forget password?"
+        android:id="@+id/forgetPassword"
+        android:gravity="start"
+        android:textColor="@color/logo_color"
+        android:backgroundTint="@color/invisible"
+        android:textSize="14dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="18dp">
     </TextView>
 
     <Button
@@ -39,6 +83,17 @@
         android:onClick="logIN"
         android:textSize="25dp"
         android:layout_marginTop="10dp"
+        android:backgroundTint="@color/my_button_color">
+
+    </Button>
+    <Button
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log In "
+        android:onClick="phonelogIN"
+        android:textSize="25dp"
+
         android:backgroundTint="@color/my_button_color">
 
     </Button>
@@ -54,7 +109,7 @@
         android:textSize="18dp"
 
         android:layout_gravity="bottom"
-        android:layout_marginTop="320dp">
+        android:layout_marginTop="18dp">
 
     </Button>
 
