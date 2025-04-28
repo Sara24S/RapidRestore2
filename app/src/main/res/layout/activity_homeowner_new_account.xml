@@ -40,6 +40,22 @@
             android:layout_marginRight="15dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:layout_gravity="center"
         android:layout_width="wrap_content"

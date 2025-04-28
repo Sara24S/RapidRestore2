@@ -16,6 +16,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".WorkRequests"
+            android:exported="false" />
+        <activity
+            android:name=".AllReviews"
+            android:exported="false" />
+        <activity
+            android:name=".AdminPage"
+            android:exported="false" />
+        <activity
             android:name=".PhoneLogin"
             android:exported="false" />
         <activity

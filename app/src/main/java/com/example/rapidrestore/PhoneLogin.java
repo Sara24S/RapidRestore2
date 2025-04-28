@@ -70,6 +70,7 @@ public class PhoneLogin extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
+                editTextOTP.setText(e.getMessage().toString());
 
                 Toast.makeText(PhoneLogin.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
 

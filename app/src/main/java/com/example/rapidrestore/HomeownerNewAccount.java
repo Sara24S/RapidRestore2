@@ -26,12 +26,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Map;
 
 public class HomeownerNewAccount extends AppCompatActivity {
 
-    TextInputEditText editTextNumberOrEmail, editTextPassword;
+    TextInputEditText editTextNumberOrEmail, editTextPassword, editTextName;
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -48,11 +49,13 @@ public class HomeownerNewAccount extends AppCompatActivity {
 
         editTextNumberOrEmail = findViewById(R.id.edit_text_numberOrEmail);
         editTextPassword = findViewById(R.id.edit_text_password);
+        editTextName = findViewById(R.id.edit_text_name);
 
     }
+    String url;
 
     public void signUp(View view) {
-        String name = "";
+        String name = String.valueOf(editTextName.getText());
         String number = "";
         String email = "";
         String NumOrEmail = String.valueOf(editTextNumberOrEmail.getText());
@@ -65,9 +68,9 @@ public class HomeownerNewAccount extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Empty fields!", Toast.LENGTH_SHORT).show();
             return;
         }
-        String url = "http://10.0.2.2/RapidRestore/adduser.php?name="
+        url = "http://10.0.2.2/RRmobile/adduser.php?name="
                 + name + "&password=" + Password + "&email=" +
-                email +"&phonenumber=" +number+ "&role=homeowner";
+                email +"&phonenumber=" +number+ "&role=homeowner"+"&firebaseid=";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         firebaseAuth.createUserWithEmailAndPassword(NumOrEmail,Password)
@@ -76,6 +79,8 @@ public class HomeownerNewAccount extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "SignUp Successful", Toast.LENGTH_SHORT).show();
+                            String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+                            url+= currentUser;
                             StringRequest request = new StringRequest(
                                     Request.Method.POST, url,
                                     new Response.Listener<String>() {
@@ -94,9 +99,10 @@ public class HomeownerNewAccount extends AppCompatActivity {
                                 }
                             });
                             queue.add(request);
-                            Intent i = new Intent(HomeownerNewAccount.this, CareersPage.class);
+                            Toast.makeText(getApplicationContext(), "sent to database", Toast.LENGTH_SHORT).show();
+
+                            Intent i = new Intent(HomeownerNewAccount.this, MainActivity.class);
                             startActivity(i);
-                            finish();
                         }
                         else {
                             Toast.makeText(getApplicationContext(), "Authentication Failed", Toast.LENGTH_SHORT).show();
