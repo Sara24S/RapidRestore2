@@ -44,8 +44,7 @@
         android:id="@+id/text_input_layout_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        app:passwordToggleEnabled="true">
+        android:hint="Username">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_text_name"

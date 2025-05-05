@@ -106,7 +106,7 @@ public class PhoneLogin extends AppCompatActivity {
 
     void sendOTP(String number){
         PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
-                .setPhoneNumber(number)
+                .setPhoneNumber("+961"+number)
                 .setTimeout(60L, TimeUnit.SECONDS)
                 .setActivity(this)
                 .setCallbacks(callbacks)

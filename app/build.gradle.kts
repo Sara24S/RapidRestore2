@@ -48,6 +48,8 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation ("com.github.bumptech.glide:glide:4.14.2")
+    implementation(libs.firebase.firestore)
+    implementation ("com.google.firebase:firebase-storage")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.14.2")
     implementation(libs.activity)
     implementation(libs.constraintlayout)

@@ -1,7 +1,10 @@
 package com.example.rapidrestore;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,19 +25,27 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class HomeownerNewAccount extends AppCompatActivity {
 
     TextInputEditText editTextNumberOrEmail, editTextPassword, editTextName;
 
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,60 +63,41 @@ public class HomeownerNewAccount extends AppCompatActivity {
         editTextName = findViewById(R.id.edit_text_name);
 
     }
-    String url;
-
     public void signUp(View view) {
+        String email = editTextNumberOrEmail.getText().toString();
+        String password = editTextPassword.getText().toString();
         String name = String.valueOf(editTextName.getText());
-        String number = "";
-        String email = "";
-        String NumOrEmail = String.valueOf(editTextNumberOrEmail.getText());
-        String Password = String.valueOf(editTextPassword.getText());
-        if(NumOrEmail.contains("mail")){
-            email = NumOrEmail;
-        }
-        else number = NumOrEmail;
-        if (NumOrEmail.isEmpty() || Password.isEmpty()){
+
+        if (email.isEmpty() || password.isEmpty()){
             Toast.makeText(getApplicationContext(), "Empty fields!", Toast.LENGTH_SHORT).show();
             return;
         }
-        url = "http://10.0.2.2/RRmobile/adduser.php?name="
-                + name + "&password=" + Password + "&email=" +
-                email +"&phonenumber=" +number+ "&role=homeowner"+"&firebaseid=";
-        RequestQueue queue = Volley.newRequestQueue(this);
 
-        firebaseAuth.createUserWithEmailAndPassword(NumOrEmail,Password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        Map<String, Object> user = new HashMap<>();
+        user.put("name", name);
+        user.put("email", email);
+        user.put("phone number", "for now");
+        user.put("role", "homeowner");
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "SignUp Successful", Toast.LENGTH_SHORT).show();
-                            String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
-                            url+= currentUser;
-                            StringRequest request = new StringRequest(
-                                    Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            Toast.makeText(getApplicationContext(), response,
-                                                    Toast.LENGTH_SHORT).show();
-                                            editTextNumberOrEmail.setText("");
-                                            editTextPassword.setText("");
-                                        }
-                                    }, new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(getApplicationContext(), "Error:" +
-                                            error.toString(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            queue.add(request);
-                            Toast.makeText(getApplicationContext(), "sent to database", Toast.LENGTH_SHORT).show();
+                            // Add a new document with a generated ID
+                            db.collection("users")
+                                    .document(mAuth.getCurrentUser().getUid()) // UID as document ID
+                                    .set(user)
+                                    .addOnSuccessListener(aVoid -> Log.d("Firestore", "User added with UID"))
+                                    .addOnFailureListener(e -> Log.w("Firestore", "Error adding user", e));
 
-                            Intent i = new Intent(HomeownerNewAccount.this, MainActivity.class);
-                            startActivity(i);
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Authentication Failed", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(HomeownerNewAccount.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
                         }
                     }
                 });
